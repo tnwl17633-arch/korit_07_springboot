@@ -1,9 +1,6 @@
 package com.example.cardatabase;
 
-import com.example.cardatabase.domain.Car;
-import com.example.cardatabase.domain.CarRepository;
-import com.example.cardatabase.domain.Owner;
-import com.example.cardatabase.domain.OwnerRepository;
+import com.example.cardatabase.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,10 +19,12 @@ public class CardatabaseApplication implements CommandLineRunner {
 
 	private final CarRepository repository;
 	private final OwnerRepository ownerRepository;
+	private final AppUserRepository userRepository;
 
-    public CardatabaseApplication(CarRepository repository, OwnerRepository ownerRepository) {
+    public CardatabaseApplication(CarRepository repository, OwnerRepository ownerRepository, AppUserRepository userRepository) {
 		this.repository = repository;
         this.ownerRepository = ownerRepository;
+		this.userRepository = userRepository;
     }
 
 
@@ -53,7 +52,10 @@ public class CardatabaseApplication implements CommandLineRunner {
 			logger.info("brand : {}, model : {}", car.getBrand(), car.getBrand());
 		}
 
+		// AppUser 더미 데이터를 추가
+		// 저 위에 보시면 Owner의 경우에는 owner1 / owner2 만들어가지고 ownerRepository에 저장했었습니다.
+		userRepository.save(new AppUser("user", "$2a$12$09VVceH9RYMJcPcqTTAu8OFuQV5UCCXLNOHq3H0xTClCYY8RdrQii", "USER" ));
+		userRepository.save(new AppUser("admin", "$2a$12$QSu1fWMkvNjcO7FBj8Qv6ON4dVGFn8OGoTqXBRMMPFtb4KrSKOtzi", "ADMIN"));
 
-
+		}
 	}
-}
