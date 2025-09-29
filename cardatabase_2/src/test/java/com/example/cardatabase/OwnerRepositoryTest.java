@@ -32,4 +32,5 @@ public class OwnerRepositoryTest {
         // 삭제가 완료되었는지를 체크하는 assertThat()문이 필수적으로 요구됩니다.
         assertThat(ownerRepository.count()).isEqualTo(0);
     }
-}
+
+    }
